@@ -1,0 +1,6 @@
+{
+  "entrypoint": "de.toxicfox.foxbot.convert.Entrypoint",
+  "name": "Sticker Converter",
+  "author": "toxicfox",
+  "version": "1.0.0"
+}
