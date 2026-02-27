@@ -16,6 +16,7 @@ import de.glowman554.bot.command.PermissionProvider;
 import de.glowman554.bot.logging.Logger;
 import de.glowman554.bot.registry.Registries;
 import de.glowman554.bot.utils.Pair;
+import de.glowman554.config.ConfigManager;
 import de.toxicfox.foxbot.convert.commands.ConvertCleanCommand;
 import de.toxicfox.foxbot.convert.commands.ConvertCommand;
 import de.toxicfox.foxbot.convert.filething.FileThingApi;
@@ -39,9 +40,10 @@ public class Entrypoint {
 
         addPermissions();
 
+        Config config = new Config(new File(ConfigManager.BASE_FOLDER, "converter.json"));
         Store store = new Store(Registries.DATABASE.get());
 
-        FileThingApi fileThingApi = new FileThingApi("https://filething.toxicfox.de", "C4h8vKmgHXFKK84Jl0ahkD6wsltWoRil6YNm6YxTW1Kz3aT9Kv9ihqjJwOxRhOKYoWDLo3Juhbs7D17J9lzd44wuNMu1e2DRXGax");
+        FileThingApi fileThingApi = new FileThingApi(config.getUploadServer(), config.getUploadToken());
 
         Registries.COMMANDS.register("convert", new ConvertCommand(fileThingApi, store));
         Registries.COMMANDS.register("convert-clean", new ConvertCleanCommand(fileThingApi, store));
